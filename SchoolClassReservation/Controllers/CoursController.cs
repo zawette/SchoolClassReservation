@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Application.Common.Exceptions;
+using Application.Common.Interfaces;
+using Application.Courss.Commands;
+using Application.Courss.DTO;
+using Application.Courss.Queries;
+using Application.Instructors.Queries;
+using Application.Reservations.Queries;
+using Domain.Entities;
+using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace SchoolClassReservation.Controllers
+{
+    [Route("api/Cours")]
+    [ApiController]
+    public class CoursController : ControllerBase
+    {
+        private readonly IMediator _mediator;
+
+        public CoursController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<CoursDto>>> GetAllCours()
+        {
+            var query = new GetAllCoursQuery();
+            var result= await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CoursDto>> GetCours([FromRoute] Guid id)
+        {
+            try
+            {
+                var result = await _mediator.Send(new GetInstructorQuery() { Id = id });
+                return Ok(result);
+            }
+            catch (EntityNotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCours([FromBody] CreateCoursCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return NoContent(); // TEMPORARY
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCours(Guid id, [FromBody] UpdateCoursCommand command)
+        {
+            try
+            {
+                command.Id = id;
+                var result = await _mediator.Send(command);
+                return NoContent();
+            }
+            catch (EntityNotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCours([FromRoute] Guid id)
+        {
+            try
+            {
+                await _mediator.Send(new DeleteCoursCommand() { Id = id });
+                return NoContent();
+            }
+            catch (EntityNotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+
+        }
+    }
+}

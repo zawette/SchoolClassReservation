@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<Application.Reservations.DTO.ReservationDto>;
+
+<div class="text-center">
+    <h1 class="display-4">Reservations List</h1>
+</div>
+
+<br />
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Instructor</th>
+            <th scope="col">Class Room</th>
+            <th scope="col">Course</th>
+            <th scope="col">Date Range</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <th scope="row">@reservation.instructor.nom</th>
+                <td>@reservation.salle.designation </td>
+                <td>@reservation.cours.designation</td>
+                <td>@reservation.dateDebut - @reservation.dateFin</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
