@@ -10,7 +10,7 @@
 + Domain layer contains entities and value types and logic specific to the domain 
 + the presentation layer can be changed with minimal effort
 ## technologies
-ASP.NET Core 3
-Entity Framework Core 
-mediatR
-Identity
++ ASP.NET Core 3
++ Entity Framework Core 
++ mediatR
++ Identity
