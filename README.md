@@ -14,3 +14,20 @@
 + Entity Framework Core 
 + mediatR
 + Identity
+
+## screens
+
+<img src="imgs\register.png"/>
+
+<img src="imgs\List.png"/>
+
+<img src="imgs\ReservationDelete.gif"/>
+
+<img src="imgs\ReservationUpdate.gif"/>
+
+<img src="imgs\AddReservationSuccess.gif"/>
+
+<img src="imgs\AddReservationError.gif"/>
+
+<img src="imgs\logout.gif"/>
+
