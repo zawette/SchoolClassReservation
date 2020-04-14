@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Update Reservation";
+    Application.Reservations.DTO.ReservationDto Reservation = ViewBag.Reservation;
+}
+@model SchoolClassReservationMVC.Models.ReservationCreationVM;
+
+
+
+<h1>@ViewData["Title"]</h1>
+
+<br />
+
+@if (!(ViewBag.Error == null))
+{
+<div class="alert alert-warning" role="alert">
+    @ViewBag.Error
+</div>
+}
+
+<form asp-action="UpdateReservation" method="post" class="form-horizontal" role="form">
+
+    <div class="form-inline">
+        <label asp-for="Instructors" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <select asp-for="instructorId" asp-items="@(new SelectList(Model.Instructors,"Id","nom",Reservation.instructor.Id) )" class="form-control w-75">
+                <option value=""  disabled>Select Instructor</option>
+            </select>
+        </div>
+    </div>
+    <br />
+
+    <div class="form-inline">
+        <label asp-for="Salles" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <select asp-for="salleId" asp-items="@(new SelectList(Model.Salles,"Id","designation",Reservation.salle.Id) )" class="form-control w-75">
+                <option value=""  disabled>Select Class Room</option>
+            </select>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="form-inline">
+        <label asp-for="Cours" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <select asp-for="coursId" asp-items="@(new SelectList(Model.Cours,"Id","designation",Reservation.cours.Id) )" class="form-control w-75">
+                <option value=""  disabled>Select Course</option>
+            </select>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="form-inline">
+        <label asp-for="dateDebut" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="dateDebut" class="form-control" />
+        </div>
+    </div>
+
+    <br />
+
+    <div class="form-inline">
+        <label asp-for="dateFin" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="dateFin" class="form-control"/>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="form-group">
+        <input type="submit" value="Update Reservation" class="btn btn-dark" />
+        <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Go Back </a>
+    </div>
+
+</form>
+
+

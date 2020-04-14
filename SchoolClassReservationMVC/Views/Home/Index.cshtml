@@ -9,6 +9,13 @@
 
 <br />
 
+@if (!(ViewBag.Result == null))
+{
+    <div class="alert alert-warning" role="alert">
+        @ViewBag.Result
+    </div>
+}
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -16,6 +23,7 @@
             <th scope="col">Class Room</th>
             <th scope="col">Course</th>
             <th scope="col">Date Range</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +36,10 @@
                 <td>@reservation.salle.designation </td>
                 <td>@reservation.cours.designation</td>
                 <td>@reservation.dateDebut - @reservation.dateFin</td>
+                <td>
+                    <a class="btn btn-success" asp-controller="Home" asp-action="UpdateReservation" asp-route-id="@reservation.Id">Update </a>
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="DeleteReservation" asp-route-id="@reservation.Id">Delete </a>
+                </td>
             </tr>
         }
 
